@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&display=swap');
 
 html, body {
     height: 100%;
@@ -14,7 +15,7 @@ html, body {
 body {
     width: 850px;
     height: 580px;
-    background-color: #DBF4C1;
+    background-image: url(/Apple-Game/assets/background.png);
     border-radius: 30px;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
     position: relative;
@@ -31,10 +32,36 @@ body {
 
 #title {
     position: absolute;
-    top: 40px;
+    display: flex;
+    gap: 10px;
+    top: 15px;
     left: 50px;
     margin: 0;
-    font-size: 50px;
+    user-select: none;
+    font-size: 40px;
+    filter: drop-shadow(0px 5px 3px rgba(0, 0, 0, 0.3));
+    font-family: "Kanit", sans-serif;
+    font-weight: 900;
+}
+
+#title-1 {
+    margin: 0;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: white;
+    background: linear-gradient(to bottom, #ff6600, #ff9900);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#title-2 {
+    margin: 0;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: white;
+    background: linear-gradient(to bottom, #66cc33, #00aa00);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #container {
@@ -42,7 +69,7 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: 140px;
+    margin-top: 190px;
 }
 
 #start-apple {
@@ -67,6 +94,7 @@ body {
     margin-left: 80px;
     display: block;
     width: 350px;
+    filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.3));
 }
 
 img {
@@ -83,6 +111,7 @@ img {
     top: 30%; /* 사과 이미지의 세로 중앙 */
     left: 48%; /* 사과 이미지의 가로 중앙 */
     transform: translate(-50%, -50%); /* 중앙 정렬 보정 */
+    user-select: none;
 }
 
 #setting {
