@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사과게임</title>
+    
+    <!--웹사이트 아이콘-->
+    <link rel="icon" type="png" href="/Apple-Game/assets/website-icon.png">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="start-screen">
+        <div>
+            <h1 id="title">Apple Game</h1>
+        </div>
+            
+        <div id="container">
+            <div id="start-button">
+                <img id="start-apple" src="/Apple-Game/assets/apple-image.png" alt="apple">
+                <p id="start-text">Play</p>
+            </div>
+            <div>
+                <img id="apple-tree" src="/Apple-Game/assets/appleTree-image.png" alt="apple tree">
+            </div>
+        </div>
+    </div>
+    <div id="game-screen">
+        <div id="countdown"></div>
+        <div id="timer-bar">
+            <div id="timer-fill"></div>
+        </div>
+        <div id="game-board"></div>
+        <div id="score"></div>
+        <div id="game-over"></div>
+    </div>
+    
+    <div id="setting">
+        <div id="reset-button">
+            <button>Reset</button>
+        </div>
+        <div id="bgm-checkbox">
+            <input type="checkbox" id="checkbox">
+            <label for="checkbox">BGM</label>
+        </div>
+    </div>
+</body>
+<script type="module" src="/Apple-Game/script.js"></script>
+</html>
