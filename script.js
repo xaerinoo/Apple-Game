@@ -46,9 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // 클릭 이벤트: 단순히 게임 화면 전환 후 보드 초기화 역할만 수행
             const startScreen = document.getElementById('start-screen');
             const gameScreen = document.getElementById('game-screen');
-            // 버튼 클릭 효과과
+            // 버튼 클릭 효과
             apple.classList.add('pulse');
             setTimeout(() => {
                 apple.classList.remove('pulse');
@@ -58,6 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     startScreen.style.display = 'none';
                     gameScreen.classList.add('fade-in');
                     gameScreen.style.display = 'block';
+
+                    // 초기화 로직 분리
+                    initializeGameBoard();
                 }, 500);
             }, 400);            
         });
@@ -83,4 +87,80 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
+
+    /* initializeGameBoard: 게임 보드를 새로 만드는 함수
+    게임 화면이 표시될 때마다 사과 170개를 배열하고,
+    숫자를 랜덤으로 배치하며,
+    총합이 10의 배수가 되도록 초기화하는 작업 */
+    function initializeGameBoard() {
+        const gameBoard = document.getElementById('game-board');
+        gameBoard.innerHTML = '';   // 기존 내용 제거
+
+        const totalApples = 170;    // 총 170개 사과 필요
+        const numbers = new Array(totalApples); // 이 배열에 170개의 숫자를 넣을 거임
+
+        // 1~9 사이의 랜덤 숫자 생성
+        let totalSum = 0;   // 모든 숫자의 합을 저장할 변수
+        for (let i=0; i<totalApples; i++) {
+            numbers[i] = Math.floor(Math.random() * 9) + 1;
+            /*
+            Math.random(): 0에서 1 미만의 랜덤 숫자를 줌
+            9를 곱해 0~8 사이로 만들고,
+            1을 더해 1~9 사이가 되도록 함
+            Math.floor: 소수점을 버려 정수로 만들어줌
+            */
+            totalSum += numbers[i]; // 새로 만든 숫자를 totalSum에 더해서 합계 갱신
+        }
+
+        // 170개 숫자의 총합이 10의 배수가 되어야 함
+        // 랜덤으로 만든 숫자의 합이 10의 배수가 아닐 수 있어 고쳐줘야 함
+        const remainder = totalSum % 10;    // 나머지 계산
+        /* 나머지가 0이 아닐 경우, 숫자 조정 시작
+        (ex) totalSum = 173일 경우 remainder = 3 */
+        if (remainder !== 0) {
+            const adjustment = 10 - remainder;
+            /* 나머지를 10에서 빼서 합을 10의 배수로 만들기 위해 필요한 수를 구함
+            (ex) adjustment = 7 */
+            let remainingAdjustment = adjustment;   // 조정값 저장
+
+            // 조정값이 0이 될 때까지 반복
+            while (remainingAdjustment > 0) { 
+                const index = Math.floor(Math.random() * totalApples);
+                /* 랜덤으로 사과 선택해 숫자 조정
+                0부터 169까지 랜덤한 위치를 골라서, 어떤 사과를 고칠지 정함 */
+                const currentNumber = numbers[index];   // 그 사과에 있던 숫자를 확인함
+                const maxIncrease = 9 - currentNumber;
+                // 현재 숫자에서 9(최대)까지 늘릴 수 있는 최댓값을 계산
+                const increase = Math.min(remainingAdjustment, maxIncrease);
+                /* remainingAdjustment(조정값)과 maxIncrease(최대 증가값) 중 더 작은 값을 선택
+                (ex) 현재 고른 사과의 숫자가 4라면,
+                최대 5까지 늘릴 수 있고, 5와 조정값 7 중 5를 선택 */
+
+                // 증가값이 0보다 크면(= 바꿀 수 있으면) 실행
+                if (increase > 0) {
+                    numbers[index] += increase; // 선택한 사과의 숫자를 증가시킴 (ex) 4가 9가 됨
+                    remainingAdjustment -= increase;    // 남은 조정값을 줄임 (ex) 7 - 5 = 2
+                }
+            }
+            /* 이 과정을 반복해서 remainingAdjustment가
+            0이 될 때까지 숫자를 조금씩 늘리면 합이 10의 배수가 된다. */
+        }
+
+        // 총합 확인 (디버깅)
+        totalSum = numbers.reduce((sum, num) => sum + num, 0);
+        console.log('Total Sum:', totalSum, '은(는) 10의 배수입니다.', totalSum % 10 === 0);
+        
+        // 사과와 숫자 생성
+        for (let i=0; i<totalApples; i++) {
+            const appleDiv = document.createElement('div');
+            appleDiv.classList.add('game-apple');
+
+            const numberSpan = document.createElement('span');
+            numberSpan.classList.add('apple-number');
+            numberSpan.textContent = numbers[i];    // 배열에서 숫자를 꺼내서 <span>에 넣음
+
+            appleDiv.appendChild(numberSpan);   // 숫자를 사과 안에 넣음음
+            gameBoard.appendChild(appleDiv);    // 사과를 게임 보드에 추가
+        }
+    }
 });

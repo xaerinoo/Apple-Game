@@ -13,7 +13,7 @@ html, body {
 }
 
 body {
-    width: 850px;
+    width: 900px;
     height: 580px;
     background-image: url(/Apple-Game/assets/background.png);
     border-radius: 30px;
@@ -193,4 +193,37 @@ img {
     0% { transform: scale(1); }
     50% { transform: scale(1.1); } /* 살짝 커지게 */
     100% { transform: scale(1); }
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(17, 45px);
+    grid-template-rows: repeat(10, 45px);
+    gap: 5px;
+    width: 850px;
+    height: 500px;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-apple {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    background-image: url('/Apple-Game/assets/gameApple.png');
+    background-size: cover;
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3));
+}
+
+.apple-number {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    pointer-events: none;
+    user-select: none;
 }
