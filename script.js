@@ -1,3 +1,5 @@
+import { setupGame, resetGame, checkPossibleMoves, setupDragEvents } from "./gameLogic.js";
+
 document.addEventListener('DOMContentLoaded', () => {
     const apple = document.getElementById('start-apple');
     const img = new Image();
@@ -62,6 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // 초기화 로직 분리
                     initializeGameBoard();
+                    // 게임 시작 시 BGM 재생
+                    if (bgmCheckbox.checked) {
+                        bgm.play();
+                    }
                 }, 500);
             }, 400);            
         });
@@ -154,13 +160,48 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i=0; i<totalApples; i++) {
             const appleDiv = document.createElement('div');
             appleDiv.classList.add('game-apple');
+            appleDiv.dataset.index = i;
+            appleDiv.dataset.number = numbers[i];
 
             const numberSpan = document.createElement('span');
             numberSpan.classList.add('apple-number');
             numberSpan.textContent = numbers[i];    // 배열에서 숫자를 꺼내서 <span>에 넣음
 
-            appleDiv.appendChild(numberSpan);   // 숫자를 사과 안에 넣음음
+            appleDiv.appendChild(numberSpan);   // 숫자를 사과 안에 넣음
             gameBoard.appendChild(appleDiv);    // 사과를 게임 보드에 추가
         }
+
+        setupGame();    // gameLogic.js에서 정의
+        setupDragEvents();
+        checkPossibleMoves();
     }
+
+    // 하단 설정 바
+    const bgm = new Audio('./assets/bgm.mp3');
+    bgm.loop = true;
+    const bgmCheckbox = document.getElementById('checkbox');
+
+    // BGM 체크박스 이벤트
+    bgmCheckbox.addEventListener('change', () => {
+        if (bgmCheckbox.checked) {
+            bgm.play();
+        } else {
+            bgm.pause();
+        }
+    });
+
+    // Reset 버튼 이벤트
+    document.getElementById('reset-button').addEventListener('click', () => {
+        const gameScreen = document.getElementById('game-screen');
+        const startScreen = document.getElementById('start-screen');
+        resetGame();
+        gameScreen.classList.add('fade-out');
+        setTimeout(()=> {
+            gameScreen.style.display = 'none';
+            startScreen.classList.add('fade-in');
+            startScreen.style.display = 'flex';
+            bgmCheckbox.checked = false;
+            bgm.pause();
+        }, 500);
+    })
 });

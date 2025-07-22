@@ -27,14 +27,13 @@
             </div>
         </div>
     </div>
+
     <div id="game-screen">
-        <div id="countdown"></div>
-        <div id="timer-bar">
-            <div id="timer-fill"></div>
+        <div id="top-bar">
+            <p>현재 점수: 0</p>
+            <p>남은 시간: 02:00</p>
         </div>
         <div id="game-board"></div>
-        <div id="score"></div>
-        <div id="game-over"></div>
     </div>
     
     <div id="setting">
@@ -46,6 +45,9 @@
             <label for="checkbox">BGM</label>
         </div>
     </div>
+
+    <audio id="bgm-audio" src="./assets/bgm.mp3" loop></audio>
 </body>
 <script type="module" src="./script.js"></script>
+<script type="module" src="./gameLogic.js"></script>
 </html>
