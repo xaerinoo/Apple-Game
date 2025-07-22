@@ -4,7 +4,6 @@
 
 ### 🎮 플레이 해보기
 http://fruit-box.kro.kr/
-(**http**로 접속해야 정상 플레이 가능합니다!)
 
 ### ✏️ 개발 회고 확인하기
 https://velog.io/@ddalgigondu/자바스크립트로-사과게임-만들기
