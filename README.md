@@ -6,9 +6,9 @@
 ![apple_game_short_1](https://github.com/user-attachments/assets/a1bc4ea4-f8e6-40c8-b0b8-850636e32952)
 ![apple_game_short_2](https://github.com/user-attachments/assets/91efb868-134d-409c-af7a-2c38f32b799b)
 
-### 🎮 플레이 해보기
-http://fruit-box.kro.kr/
-합이 10의 배수가 되도록 가로/세로로 묶으면 됩니다!
+### 🎮 플레이 해보기: http://fruit-box.kro.kr/
+**PC 환경**에서 플레이 가능합니다. (추후 모바일에서도 가능하게 구현할 예정)<br>
+합이 **10의 배수**가 되도록 가로/세로로 묶으면 됩니다.<br>
 제한 시간은 2분이며, 여러 사과를 묶을수록 높은 점수가 부여됩니다.
 
 ### ✏️ 개발 회고 확인하기
